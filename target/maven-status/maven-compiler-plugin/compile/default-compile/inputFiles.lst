@@ -1,0 +1,11 @@
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/security/JwtTokenFilterConfigurer.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/repository/UserRepository.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/controller/UserController.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/security/UserDetailsAuthService.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/service/impl/UserServiceImpl.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/domain/User.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/security/JwtTokenFilter.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/AuthServiceApplication.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/security/WebSecurityConfig.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/service/UserService.java
+/Users/victorviana/projects/pandorabox/services-app/auth-service/src/main/java/br/com/auth/security/JwtTokenProvider.java

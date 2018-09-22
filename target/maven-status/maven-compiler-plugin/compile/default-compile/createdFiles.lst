@@ -1,0 +1,11 @@
+br/com/auth/security/UserDetailsAuthService.class
+br/com/auth/security/JwtTokenFilter.class
+br/com/auth/security/WebSecurityConfig.class
+br/com/auth/repository/UserRepository.class
+br/com/auth/security/JwtTokenFilterConfigurer.class
+br/com/auth/security/JwtTokenProvider.class
+br/com/auth/controller/UserController.class
+br/com/auth/service/UserService.class
+br/com/auth/domain/User.class
+br/com/auth/AuthServiceApplication.class
+br/com/auth/service/impl/UserServiceImpl.class
