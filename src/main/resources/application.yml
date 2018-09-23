@@ -2,39 +2,43 @@ server:
   port: 7531
 
 # Config HEROKU
-spring:
-  application:
-    name: auth-service
-  datasource:
-    url: ${JDBC_DATABASE_URL}
-    username: ${JDBC_DATABASE_USERNAME}
-    password: ${JDBC_DATABASE_PASSWORD}
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-# Config DEV
 #spring:
 #  application:
-#    name: auth-service
+#    name: spacebox-auth-service
 #  datasource:
-#    url: jdbc:mysql://localhost:3306/spacebox?useSSL=false
-#    username: root
-#    password: 123456789
+#    url: ${JDBC_DATABASE_URL}
+#    username: ${JDBC_DATABASE_USERNAME}
+#    password: ${JDBC_DATABASE_PASSWORD}
 #  jpa:
 #    properties:
 #      hibernate:
 #        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 #        show_sql: true
 #        format_sql: true
+
+# Config DEV
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/spacebox?useSSL=false
+    username: root
+    password: 123456789
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        show_sql: true
+        format_sql: true
 security:
   jwt:
     token:
       secret-key: secret-key
-      expire-length: 3600000
+      expire-length: 36000
       type: Bearer
 
-logging:
-  level:
-    ROOT: INFO
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        type: trace

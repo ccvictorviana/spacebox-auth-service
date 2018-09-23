@@ -5,7 +5,6 @@ import br.com.auth.service.UserService;
 import br.com.spacebox.common.model.response.TokenResponse;
 import br.com.spacebox.common.security.PrincipalToken;
 import br.com.spacebox.common.security.UserDetailsAuth;
-import br.com.spacebox.common.utils.Utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -46,8 +45,9 @@ public class JwtTokenProvider {
         User user = userService.find(username);
         Date validity = new Date(now.getTime() + tokenExpiration);
         String tokenAccess;
+        Date dateNow = new Date();
 
-        if (user.getTokenExpiration() != null && Utils.getDateNow().before(user.getTokenExpiration())) {
+        if (user.getTokenExpiration() != null && dateNow.before(user.getTokenExpiration())) {
             tokenAccess = user.getToken();
         } else {
             Claims claims = Jwts.claims().setSubject(username);
