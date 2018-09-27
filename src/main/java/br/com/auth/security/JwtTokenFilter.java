@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
@@ -21,14 +22,23 @@ public class JwtTokenFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {
-
-        String token = jwtTokenProvider.resolveToken((HttpServletRequest) req);
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication auth = jwtTokenProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(auth);
+        if (!isAllowedWithoutToken(req)) {
+            String token = jwtTokenProvider.resolveToken((HttpServletRequest) req);
+            if (token != null && jwtTokenProvider.validateToken(token)) {
+                Authentication auth = jwtTokenProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+                filterChain.doFilter(req, res);
+            } else {
+                ((HttpServletResponse) res).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            }
+        } else {
+            filterChain.doFilter(req, res);
         }
-
-        filterChain.doFilter(req, res);
     }
 
+    private boolean isAllowedWithoutToken(ServletRequest servletRequest) {
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String uri = req.getRequestURI();
+        return (uri != null && (uri.endsWith("/users/login") || (uri.endsWith("/users/") && req.getMethod() == "POST")));
+    }
 }

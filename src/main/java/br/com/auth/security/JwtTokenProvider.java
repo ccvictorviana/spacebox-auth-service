@@ -50,11 +50,12 @@ public class JwtTokenProvider {
         if (user.getTokenExpiration() != null && dateNow.before(user.getTokenExpiration())) {
             tokenAccess = user.getToken();
         } else {
+            int safeTimeBetweenDbAndToken = 9000; //15 segundos
             Claims claims = Jwts.claims().setSubject(username);
             tokenAccess = Jwts.builder()
                     .setClaims(claims)
                     .setIssuedAt(now)
-                    .setExpiration(validity)
+                    .setExpiration(new Date(validity.getTime() + safeTimeBetweenDbAndToken))
                     .signWith(SignatureAlgorithm.HS256, tokenSecretKey)
                     .compact();
         }

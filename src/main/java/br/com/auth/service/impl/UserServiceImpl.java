@@ -11,7 +11,6 @@ import br.com.spacebox.common.security.PrincipalToken;
 import br.com.spacebox.common.security.UserDetailsAuth;
 import br.com.spacebox.common.service.AEntityService;
 import br.com.spacebox.common.service.ValidationType;
-import br.com.spacebox.common.utils.Utils;
 import br.com.spacebox.common.validation.FluentValidationString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -82,7 +81,8 @@ public class UserServiceImpl extends AEntityService<User> implements UserService
 
     @Override
     public boolean existsToken(String token) {
-        return repository.existsToken(token, Utils.getDateNow());
+        Date dateNow = new Date();
+        return repository.existsToken(token, dateNow);
     }
 
     @Override
