@@ -15,6 +15,17 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         show_sql: true
         format_sql: true
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 3600000
+      type: Bearer
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
 
 # Config DEV
 #spring:
