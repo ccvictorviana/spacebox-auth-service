@@ -1,9 +1,9 @@
 package br.com.auth.service.impl;
 
-import br.com.auth.domain.User;
 import br.com.auth.repository.UserRepository;
 import br.com.auth.security.JwtTokenProvider;
 import br.com.auth.service.UserService;
+import br.com.spacebox.common.domain.User;
 import br.com.spacebox.common.exceptions.BusinessException;
 import br.com.spacebox.common.messages.EMessage;
 import br.com.spacebox.common.model.response.TokenResponse;

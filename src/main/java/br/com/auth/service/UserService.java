@@ -1,10 +1,11 @@
 package br.com.auth.service;
 
-import br.com.auth.domain.User;
+import br.com.spacebox.common.domain.User;
 import br.com.spacebox.common.model.response.TokenResponse;
 import br.com.spacebox.common.security.UserDetailsAuth;
 
 import java.util.Date;
+import java.util.List;
 
 public interface UserService {
     void create(User user);

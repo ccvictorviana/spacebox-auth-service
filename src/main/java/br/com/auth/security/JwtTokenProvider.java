@@ -1,11 +1,12 @@
 package br.com.auth.security;
 
-import br.com.auth.domain.User;
 import br.com.auth.service.UserService;
+import br.com.spacebox.common.domain.User;
 import br.com.spacebox.common.model.response.TokenResponse;
 import br.com.spacebox.common.security.PrincipalToken;
 import br.com.spacebox.common.security.UserDetailsAuth;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,9 @@ public class JwtTokenProvider {
         User user = userService.find(username);
         Date validity = new Date(now.getTime() + tokenExpiration);
         String tokenAccess;
-        Date dateNow = new Date();
 
-        if (user.getTokenExpiration() != null && dateNow.before(user.getTokenExpiration())) {
-            tokenAccess = user.getToken();
-        } else {
-            int safeTimeBetweenDbAndToken = 9000; //15 segundos
+        if (isTokenExpired(user)) {
+            int safeTimeBetweenDbAndToken = 9000;
             Claims claims = Jwts.claims().setSubject(username);
             tokenAccess = Jwts.builder()
                     .setClaims(claims)
@@ -58,6 +56,8 @@ public class JwtTokenProvider {
                     .setExpiration(new Date(validity.getTime() + safeTimeBetweenDbAndToken))
                     .signWith(SignatureAlgorithm.HS256, tokenSecretKey)
                     .compact();
+        } else {
+            tokenAccess = user.getToken();
         }
 
         userService.saveToken(username, tokenAccess, validity);
@@ -68,6 +68,21 @@ public class JwtTokenProvider {
         token.setType(tokenType);
 
         return token;
+    }
+
+    private boolean isTokenExpired(User user) {
+        boolean result = true;
+
+        if (user.getToken() != null) {
+            try {
+                Jwts.parser().setSigningKey(tokenSecretKey).parseClaimsJws(user.getToken());
+                Date dateNow = new Date();
+                result = user.getTokenExpiration() != null && dateNow.after(user.getTokenExpiration());
+            } catch (ExpiredJwtException ex) {
+            }
+        }
+
+        return result;
     }
 
     public Authentication getAuthentication(String token) {

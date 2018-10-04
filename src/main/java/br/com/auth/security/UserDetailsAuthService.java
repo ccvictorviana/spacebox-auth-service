@@ -1,7 +1,7 @@
 package br.com.auth.security;
 
-import br.com.auth.domain.User;
 import br.com.auth.repository.UserRepository;
+import br.com.spacebox.common.domain.User;
 import br.com.spacebox.common.exceptions.BusinessException;
 import br.com.spacebox.common.security.UserDetailsAuth;
 import org.springframework.beans.factory.annotation.Autowired;

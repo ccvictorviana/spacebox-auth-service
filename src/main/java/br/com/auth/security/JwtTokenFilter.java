@@ -39,6 +39,8 @@ public class JwtTokenFilter extends GenericFilterBean {
     private boolean isAllowedWithoutToken(ServletRequest servletRequest) {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String uri = req.getRequestURI();
-        return (uri != null && (uri.endsWith("/users/login") || (uri.endsWith("/users/") && req.getMethod() == "POST")));
+        String uriLowerCase = uri.toLowerCase();
+
+        return (uriLowerCase.endsWith("/users/login") || (uriLowerCase.endsWith("/users/") && req.getMethod().equalsIgnoreCase("POST")));
     }
 }

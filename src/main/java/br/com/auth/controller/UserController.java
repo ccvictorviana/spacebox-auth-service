@@ -1,7 +1,7 @@
 package br.com.auth.controller;
 
-import br.com.auth.domain.User;
 import br.com.auth.service.UserService;
+import br.com.spacebox.common.domain.User;
 import br.com.spacebox.common.model.request.LoginRequest;
 import br.com.spacebox.common.model.request.UserRequest;
 import br.com.spacebox.common.model.response.TokenResponse;

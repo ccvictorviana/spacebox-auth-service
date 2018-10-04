@@ -1,6 +1,6 @@
 package br.com.auth.repository;
 
-import br.com.auth.domain.User;
+import br.com.spacebox.common.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
