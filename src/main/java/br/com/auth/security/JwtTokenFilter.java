@@ -40,7 +40,8 @@ public class JwtTokenFilter extends GenericFilterBean {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String uri = req.getRequestURI();
         String uriLowerCase = uri.toLowerCase();
+        boolean isRegisterUserRequest = (uriLowerCase.endsWith("/users/") && req.getMethod().equalsIgnoreCase("POST"));
 
-        return (uriLowerCase.endsWith("/users/login") || (uriLowerCase.endsWith("/users/") && req.getMethod().equalsIgnoreCase("POST")));
+        return (uriLowerCase.endsWith("/users/login") || (uriLowerCase.endsWith("/users/") && isRegisterUserRequest));
     }
 }
